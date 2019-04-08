@@ -15,7 +15,9 @@ namespace PowerSettlement.Controllers
 		// of trips it will take to carry all the bags in
 
 		[HttpGet, Route("getall")]
-		public List<float> PowerSettlement()
+		//public List<float> PowerSettlement()
+		public int PowerSettlement()
+
 		{
 			List<float> bagWeight = new List<float>();
 
@@ -24,39 +26,46 @@ namespace PowerSettlement.Controllers
 			bagWeight.Add(1.3f);
 			bagWeight.Add(1.9f);
 			bagWeight.Add(2.7f);
+			//bagWeight.Add(1.4f);
 			bagWeight.Add(1.6f);
 
 
 			//bagWeight = bagWeight.OrderByDescending(p => p).ToList(); // descending Order
 
 			bagWeight.Sort(); // ascending order
-							
-							  //Without Linq
+
+			//Without Linq
 
 			//li.Sort((a, b) => a.CompareTo(b)); // ascending sort
 			//li.Sort((a, b) => -1 * a.CompareTo(b)); // descending sort
 
-			return bagWeight;
+			//return bagWeight;
+			
+			return BagWeights(bagWeight);
 		}
 
-		private List<float> BagWeights(List<float> bagWeight)
+		private int BagWeights(List<float> bagWeight)
 		{
 			var BagCount = 0;
 
 			foreach (var x in bagWeight)
 			{
 				if (x > 2.0)
-					BagCount++;
-				foreach (var y in bagWeight)
 				{
-					if (x == y)
-						continue;
-
-					if (x + y <= 3)
-					{
-						BagCount++;
-					}
+					BagCount++;
+					continue;
 				}
+
+				//foreach (var y in bagWeight)
+				//{
+				//	if (x == y)
+				//		continue;
+
+				//	if (x + y <= 3)
+				//	{
+				//		BagCount++;
+				//	}
+				//}
 			};
 			return BagCount;
 		}
